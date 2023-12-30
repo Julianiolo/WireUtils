@@ -12,7 +12,7 @@ namespace WireUtils {
     /*
         Reads the value at register_addr
 
-        waits for WireUtils::read_delay_ms milliseconds before reading each byte
+        waits for a maximum of WireUtils::read_delay_ms milliseconds before reading each byte
 
         Returns same errors as Wire endTransmission function + no answer + wire->read error
         https://www.arduino.cc/reference/en/language/functions/communication/wire/endtransmission/

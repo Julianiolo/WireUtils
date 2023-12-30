@@ -15,7 +15,12 @@ uint16_t WireUtils::read16(TwoWire* wire, uint8_t device_addr, uint8_t register_
     uint8_t buf[2] = {0};
 
     for (uint8_t i = 0; i < 2; i++) {
-        delay(WireUtils::read_delay_ms);
+
+        for(uint8_t t = 0; t < WireUtils::read_delay_ms; t++) {
+            if(wire->available())
+                break;
+            delay(1);
+        }
 
         if (!wire->available()) {
             if(error != NULL) *error = 6;
