@@ -2,7 +2,7 @@
 
 int WireUtils::read_delay_ms = 10;
 
-uint16_t WireUtils::read16(TwoWire* wire, uint8_t device_addr, uint8_t register_addr, uint8_t* error = NULL) {
+uint16_t WireUtils::read16(TwoWire* wire, uint8_t device_addr, uint8_t register_addr, uint8_t* error) {
     wire->beginTransmission(device_addr);
     wire->write(register_addr);
     uint8_t ret = wire->endTransmission(false);
@@ -10,7 +10,7 @@ uint16_t WireUtils::read16(TwoWire* wire, uint8_t device_addr, uint8_t register_
         if(error != NULL) *error = ret;
         return 0;
     }
-    wire->requestFrom(device_addr, 2); // returns number of bytes available or something? Anyway not an error
+    wire->requestFrom(device_addr, (uint8_t)2); // returns number of bytes available or something? Anyway not an error
     
     uint8_t buf[2] = {0};
 
